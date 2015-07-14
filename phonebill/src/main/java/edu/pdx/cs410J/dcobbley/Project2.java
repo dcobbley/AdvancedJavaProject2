@@ -1,4 +1,4 @@
-/** Description of Project1
+/** Description of Project2
         *
         * @author David Cobbley
         * @version 1.0 July 7, 2015.
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Project1 {
+public class Project2 {
 
   static phonebill myPhoneBill;
   static String customer;
@@ -47,7 +47,7 @@ public class Project1 {
       catch(IllegalArgumentException ex)
       {
         System.out.println(ex.getMessage());
-        System.out.println("Usage: java edu.pdx.cs410J.<login-id>.Project1 [options] <args>\n" +
+        System.out.println("Usage: java edu.pdx.cs410J.<login-id>.Project2 [options] <args>\n" +
                 "   args are (in this order):\n" +
                 "       customer               Person whose phone bill we’re modeling\n" +
                 "       callerNumber           Phone number of caller\n" +
@@ -135,7 +135,7 @@ public class Project1 {
         System.out.println("This program is a phonebill application which takes a very specific amount of arguments");
         System.out.println("You must provide a customer name, caller number, callee number, start time, and end time (mm/dd/yyyy mm:hh)");
         System.out.println();
-        System.out.println("Usage: java edu.pdx.cs410J.<login-id>.Project1 [options] <args>\n" +
+        System.out.println("Usage: java edu.pdx.cs410J.<login-id>.Project2 [options] <args>\n" +
                 "   args are (in this order):\n" +
                 "       customer               Person whose phone bill we’re modeling\n" +
                 "       callerNumber           Phone number of caller\n" +
