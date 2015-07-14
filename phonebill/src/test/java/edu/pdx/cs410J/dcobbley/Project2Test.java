@@ -59,12 +59,17 @@ public class Project2Test extends InvokeMainTestCase {
         assertEquals(new Integer(1), result.getExitCode());
         assertTrue(result.getOut().contains("Missing command line arguments"));
     }
+    @Test
+    public void TestTextDumper(){
+        MainMethodResult result = invokeMain("david", "503-709-4866", "503-880-6960", "10/15/2015", "09:38", "10/15/2015", "09:42", "-textFile", "DavesBill");
+        //System.out.println(result.getOut());
+
+    }
 
     @Test
-    public void personalTestingTest(){
-        MainMethodResult result = invokeMain("-testing");
+    public void TestTextParser(){
+        MainMethodResult result = invokeMain("-textFile", "DavesBill");
         System.out.println(result.getOut());
-
     }
 
 

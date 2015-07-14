@@ -23,9 +23,13 @@ public class phonebill extends AbstractPhoneBill{
      */
     phonebill(String customer, phonecall phoneCall)
     {
-        this. customer = customer;
+        this.customer = customer;
         phoneCalls = new ArrayList<AbstractPhoneCall>();
         addPhoneCall(phoneCall);
+    }
+    phonebill(String customer)
+    {
+        this.customer = customer;
     }
 
     /**

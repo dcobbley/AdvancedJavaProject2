@@ -10,6 +10,7 @@ package edu.pdx.cs410J.dcobbley;
 
 import edu.pdx.cs410J.AbstractPhoneBill;
 
+import javax.xml.soap.Text;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,6 +24,9 @@ public class Project2 {
   static String calleeNumber;
   static String startTime;
   static String endTime;
+  static TextDumper dump;
+  static TextParser parse;
+  static AbstractPhoneBill currentPhoneBill;
 
   /**
    * Main will be called when the program is run, it parses the commands given by the user and calls the appropriate functionality.
@@ -34,13 +38,27 @@ public class Project2 {
       try {
           if (args.length == 0) //Check if there are no arguments
               throw new IllegalArgumentException("Missing command line arguments");
-          if(args.length == 1 && args[0].contains("-README")){
-              Readme();
-              System.exit(0);
+          if(args.length == 1){
+              switch(args[0]) {
+                  case "-README":
+                      Readme();
+                      System.exit(0);
+                      break;
+                  default:
+                      throw new IllegalArgumentException("Incorrect args");
+              }
           }
-          if(args.length == 1 && args[0].contains("-testing")){
-              new TextDumper().dump(null);
-              System.exit(0);
+          if(args.length == 2){
+              switch(args[0]){
+                  case "-textFile":
+                      parse = new TextParser();
+                      parse.setFilePath(args[1]);
+                      currentPhoneBill = parse.parse();
+                      System.exit(0);
+                      break;
+                  default:
+                      throw new IllegalArgumentException("Incorrect args for -textFile ");
+              }
           }
           else if (args.length < 6) //Check if there are not enough arguments to be a complete phonecall
               throw new IllegalArgumentException("Not enough args");      }
@@ -106,7 +124,7 @@ public class Project2 {
      */
     try {
         for (int x = 7; x < args.length; x++) {
-            if (x > 8)
+            if (x > 10)
                 break;
             switch (args[x]) {
                 case "-README":
@@ -114,6 +132,19 @@ public class Project2 {
                     break;
                 case "-print":
                     System.out.println("Customer: " + myPhoneBill.getCustomer() + " " + myPhoneBill.getPhoneCalls());
+                    break;
+                case "-textFile":
+                    //must contain x+1, pass the
+                    dump = new TextDumper();
+                    if(args[++x] != null) {
+                        dump.setFilePath(args[x]);
+                        dump.dump(myPhoneBill);
+
+                    }
+                    else{
+                        throw new IllegalArgumentException("-textFile argument must contain a valid file name");
+                    }
+
                     break;
                 default:
                     throw new IllegalArgumentException("Command Line Argument not found: \"" + args[x] +"\"");
@@ -147,6 +178,7 @@ public class Project2 {
                 "       -README                Prints a README for this project and exits\n" +
                 "   Date and time should be in the format: mm/dd/yyyy hh:mm");
     }
+
 
 
 }
