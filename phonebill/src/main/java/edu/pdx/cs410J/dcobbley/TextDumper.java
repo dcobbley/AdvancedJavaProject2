@@ -20,7 +20,7 @@ public class TextDumper implements PhoneBillDumper {
     public void dump(AbstractPhoneBill bill) {
         String path = System.getProperty("user.dir");
         System.out.println( path);
-        System.out.println(bill.getCustomer());
-        System.out.println(bill.getPhoneCalls());
+        //System.out.println(bill.getCustomer());
+        //System.out.println(bill.getPhoneCalls());
     }
 }
