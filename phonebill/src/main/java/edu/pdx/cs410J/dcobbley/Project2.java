@@ -19,7 +19,7 @@ public class Project2 {
     private static final int MAXARGUMENTS = 3;//Update this value if we get more than -readme -print -textFile
     //Global variables
     static ArrayList<String> commands; //used to keep track of all the commands that will be run at the end of the program
-    static phonebill MyPhoneBill;
+    static phonebill MyPhoneBill = null;
   /**
    * Main will be called when the program is run, it parses the commands given by the user and calls the appropriate functionality.
    * @param args contains all the command line arguments passed into the program
@@ -41,34 +41,45 @@ public class Project2 {
      */
     private static void parseCommandsAtBeginning(String[] args){
         int element = 0;
-        //Check if one of the first 3 args is a command
-        //If one or all three args are commands, put them into a command array which will get executed after work is done
-        //Start parsing for a customer
-        for(;element<MAXARGUMENTS;element++){
-            //check if -print, -README, -textFile filename
-            switch(args[element]){
-                case "-README":
-                    //add readme to the command list
-                    addArgumentCommand("-README");
-                    break;
-                case "-print":
-                    //add print to the list
-                    addArgumentCommand("-print");
-                    break;
-                case "-textFile":
-                    //check for ++element
-                    if(args.length > element+1){
-                        //save -textfile Filename
-                        addArgumentCommand("textFile "+args[++element]);
-                    }
-                    else{
-                        //throw error
-                    }
-                    break;
-                default:
-                    parseCustomerIfExists(args, element);
-                    break;
+        try {
+            if (args.length == 0) {
+                throw new IllegalArgumentException("Cannot have zero arguments");
             }
+
+
+            //Check if one of the first 3 args is a command
+            //If one or all three args are commands, put them into a command array which will get executed after work is done
+            //Start parsing for a customer
+            for (; element < MAXARGUMENTS && element < args.length; element++) {
+                //check if -print, -README, -textFile filename
+                switch (args[element]) {
+                    case "-README":
+                        //add readme to the command list
+                        addArgumentCommand("-README");
+                        break;
+                    case "-print":
+                        //add print to the list
+                        addArgumentCommand("-print");
+                        break;
+                    case "-textFile":
+                        //check for ++element
+                        if (args.length > element + 1) {
+                            //save -textfile Filename
+                            addArgumentCommand("textFile " + args[++element]);
+                        } else {
+                            //throw error
+                        }
+                        break;
+                    default:
+                        parseCustomerIfExists(args, element);
+                        break;
+                }
+            }
+        }
+        catch(IllegalArgumentException ex){
+            System.out.println(ex.getMessage());
+            Readme();
+            System.exit(1);
         }
         //if first three args are all commands, then begin to parse the next bit if it exists.
         parseCustomerIfExists(args, element);
@@ -172,6 +183,8 @@ public class Project2 {
             }
             else{
                 //go straight to executing the commands
+
+                System.out.println("Execute B called");
                 executeCommands();
             }
         }
@@ -218,7 +231,8 @@ public class Project2 {
     private static void parseCommandsAtEnd(String[] args, int element){
         //while elements<args.length keep parsing.
         //if case is a valid command, add it to the list
-        while(args.length>= element){
+        int maxElement = element +3;
+        while(args.length> element && args.length<maxElement){
             //there are args to parse
             switch(args[element]){
                 case "-README":
@@ -248,6 +262,8 @@ public class Project2 {
 
         }
         //no args left to parse, begin execution
+
+        System.out.println("execute A called");
         executeCommands();
     }
 
@@ -326,11 +342,63 @@ public class Project2 {
     }
 
     private static void executeCommands(){
+
+        System.out.println("Execute commands called");
+        boolean printFlag = false;
         //Begin executing commands
         //check if the commands exist and execute in this order.
-        //textFile
+        //textFile-
+        // check if it exists, if so, {
+        // read in and compare with myPhoneBill.
+        //if customer name not equal throw error
+        //if myPhoneBill == null, set TemporaryPhoneBill to myPhoneBill
+        //
+        //else{
+        //create a new empty phone bill
+        //add myPhoneBill to it, if myPhoneBill is null, create emptyphonebill
+
         //print
+        //simply print myPhoneBill, should contain an up to date version of whatever it needs
+
         //readme
+        //Simply call the readme
+        try {
+            for (String comm : commands) {
+                if (comm.contains("-textFile")) {
+
+
+                    //commands.remove(commands.indexOf(comm));
+
+                    //commands.remove(commands.indexOf(comm)+1);
+                }
+            }
+            int x= 0;
+            for (String comm : commands) {
+                if (!printFlag &&comm.contains("-print")) {
+                    System.out.println("if Statement called");
+                    if (MyPhoneBill != null) {
+                        System.out.println("Customer: " + MyPhoneBill.getCustomer() + " " + MyPhoneBill.getPhoneCalls());
+                        printFlag = true;
+                    } else {
+                        //MyphoneBill is null, throw exception
+                        throw new Exception("Must provide a phone bill");
+                    }
+                }
+            }
+            for (String comm : commands) {
+                if (comm.contains("-README")) {
+                    Readme();
+
+                    //commands.remove(commands.indexOf(comm));
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println(ex.getMessage());
+            Readme();
+            System.exit(1);
+        }
     }
     /**
      * Readme function contains the readme of all useful information the user may need to know.
