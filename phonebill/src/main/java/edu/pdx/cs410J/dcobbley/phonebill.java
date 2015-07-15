@@ -30,6 +30,13 @@ public class phonebill extends AbstractPhoneBill{
     phonebill(String customer)
     {
         this.customer = customer;
+        phoneCalls = new ArrayList<AbstractPhoneCall>();
+    }
+    phonebill()
+    {
+        //Create an empty phonebill
+        customer = "";
+        phoneCalls = new ArrayList<AbstractPhoneCall>();
     }
 
     /**

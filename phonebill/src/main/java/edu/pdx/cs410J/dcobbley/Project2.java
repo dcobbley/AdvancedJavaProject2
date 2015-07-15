@@ -9,12 +9,9 @@
 package edu.pdx.cs410J.dcobbley;
 
 import edu.pdx.cs410J.AbstractPhoneBill;
+import edu.pdx.cs410J.AbstractPhoneCall;
 
-import javax.xml.soap.Text;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public class Project2 {
 
@@ -27,6 +24,7 @@ public class Project2 {
   static TextDumper dump;
   static TextParser parse;
   static AbstractPhoneBill currentPhoneBill;
+  static AbstractPhoneBill otherPhoneBill;
 
   /**
    * Main will be called when the program is run, it parses the commands given by the user and calls the appropriate functionality.
@@ -53,7 +51,33 @@ public class Project2 {
                   case "-textFile":
                       parse = new TextParser();
                       parse.setFilePath(args[1]);
+                      if(parse.ifFileExists()){
+                          currentPhoneBill = parse.parse();
+                          System.exit(0);
+                      }
+                      else
+                      {
+                          //Create an empty phopne bill and write to disk
+                          currentPhoneBill = new phonebill();
+                          dump = new TextDumper();
+                          dump.setFilePath(args[1]);
+                          dump.dump(currentPhoneBill);
+                      }
+
+                      break;
+                  default:
+                      throw new IllegalArgumentException("Incorrect args for -textFile ");
+              }
+          }
+          if(args.length == 3){
+              switch(args[0]){
+                  case "-textFile":
+                      parse = new TextParser();
+                      parse.setFilePath(args[1]);
                       currentPhoneBill = parse.parse();
+                      break;
+                  case "-README":
+                      Readme();
                       System.exit(0);
                       break;
                   default:
@@ -101,6 +125,7 @@ public class Project2 {
     endTime = args[5] + " ";
     endTime += args[6];
 
+
     if(startTime.contains("\"")||endTime.contains("\""))
         throw new IllegalArgumentException("Date and time cannot contain quotes ");
     if(!callerNumber.matches("\\d{3}-\\d{3}-\\d{4}$")||!calleeNumber.matches("\\d{3}-\\d{3}-\\d{4}$"))
@@ -110,8 +135,7 @@ public class Project2 {
     if(!args[4].matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")||!args[6].matches("([01]?[0-9]|2[0-3]):[0-5][0-9]"))
         throw new IllegalArgumentException("Time format must follow mm:hh (24 hour time)");
     }
-    catch (IllegalArgumentException ex){
-        System.out.println(args[3]);
+    catch (IllegalArgumentException ex){;
         System.out.println(ex.getMessage());
         System.exit(1);
     }
@@ -135,11 +159,33 @@ public class Project2 {
                     break;
                 case "-textFile":
                     //must contain x+1, pass the
-                    dump = new TextDumper();
                     if(args[++x] != null) {
-                        dump.setFilePath(args[x]);
-                        dump.dump(myPhoneBill);
+                        parse = new TextParser();
+                        parse.setFilePath(args[x]);
+                        //File exists
+                        if(parse.ifFileExists()){
+                            //Parse the file & read in phonebill
+                            otherPhoneBill = parse.parse();
+                            //check that the customer names match
+                            if(myPhoneBill.getCustomer().equals(otherPhoneBill.getCustomer())){
+                                //try to add the phonecall to the list of phone calls - watch for duplicates
+                                Collection tempPhoneCalls = otherPhoneBill.getPhoneCalls();
+                                tempPhoneCalls.forEach(obj->myPhoneBill.addPhoneCall((AbstractPhoneCall) obj));
+                                //dump the bill back to the text file
+                                dump = new TextDumper();
+                                dump.setFilePath(args[x]);
+                                dump.dump(myPhoneBill);
 
+                            }
+                        }
+                        else{
+                            //File does not exist
+                            //create a new dump
+                            dump = new TextDumper();
+                            dump.setFilePath(args[x]);
+                            //dump
+                            dump.dump(myPhoneBill);
+                        }
                     }
                     else{
                         throw new IllegalArgumentException("-textFile argument must contain a valid file name");

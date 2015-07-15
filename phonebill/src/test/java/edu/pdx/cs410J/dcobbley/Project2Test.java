@@ -69,8 +69,81 @@ public class Project2Test extends InvokeMainTestCase {
     @Test
     public void TestTextParser(){
         MainMethodResult result = invokeMain("-textFile", "DavesBill");
-        System.out.println(result.getOut());
+        //System.out.println(result.getOut());
     }
 
+    @Test
+    public void TestPrintNoDataNoOtherArgs(){
+        MainMethodResult result = invokeMain("-print");
+        assertEquals(new Integer(1), result.getExitCode());
+        assertTrue(result.getOut().contains("Incorrect args\n" +
+                "Usage: java edu.pdx.cs410J.<login-id>.Project2 [options] <args>\n" +
+                "   args are (in this order):\n" +
+                "       customer               Person whose phone bill we’re modeling\n" +
+                "       callerNumber           Phone number of caller\n" +
+                "       calleeNumber           Phone number of person who was called\n" +
+                "       startTime              Date and time call began (24-hour time)\n" +
+                "       endTime                Date and time call ended (24-hour time)\n" +
+                "   options are (options may appear in any order):\n" +
+                "       -print                 Prints a description of the new phone call\n" +
+                "       -README                Prints a README for this project and exits\n" +
+                "   Date and time should be in the format: mm/dd/yyyy hh:mm"));
+
+    }
+
+    @Test
+    public void TestReadmeNoDataNoArgs(){
+        MainMethodResult result = invokeMain("-README");
+        assertEquals(new Integer(0), result.getExitCode());
+        assertTrue(result.getOut().contains("README has been called\n" +
+                "This program is a phonebill application which takes a very specific amount of arguments\n" +
+                "You must provide a customer name, caller number, callee number, start time, and end time (mm/dd/yyyy mm:hh)\n" +
+                "\n" +
+                "Usage: java edu.pdx.cs410J.<login-id>.Project2 [options] <args>\n" +
+                "   args are (in this order):\n" +
+                "       customer               Person whose phone bill we’re modeling\n" +
+                "       callerNumber           Phone number of caller\n" +
+                "       calleeNumber           Phone number of person who was called\n" +
+                "       startTime              Date and time call began (24-hour time)\n" +
+                "       endTime                Date and time call ended (24-hour time)\n" +
+                "   options are (options may appear in any order):\n" +
+                "       -print                 Prints a description of the new phone call\n" +
+                "       -README                Prints a README for this project and exits\n" +
+                "   Date and time should be in the format: mm/dd/yyyy hh:mm"));
+    }
+
+    @Test
+    public void TestTextFileNodataNoArgsNofile(){
+        MainMethodResult result = invokeMain("-textFile");
+        assertEquals(new Integer(1), result.getExitCode());
+        assertTrue(result.getOut().contains("Incorrect args\n" +
+                "Usage: java edu.pdx.cs410J.<login-id>.Project2 [options] <args>\n" +
+                "   args are (in this order):\n" +
+                "       customer               Person whose phone bill we’re modeling\n" +
+                "       callerNumber           Phone number of caller\n" +
+                "       calleeNumber           Phone number of person who was called\n" +
+                "       startTime              Date and time call began (24-hour time)\n" +
+                "       endTime                Date and time call ended (24-hour time)\n" +
+                "   options are (options may appear in any order):\n" +
+                "       -print                 Prints a description of the new phone call\n" +
+                "       -README                Prints a README for this project and exits\n" +
+                "   Date and time should be in the format: mm/dd/yyyy hh:mm"));
+        //System.out.println(result.getOut());
+    }
+
+    //Conditional upon their being a DavesBill file in the correct directory
+    @Test
+    public void TestTextFileNoDataNoArgsWithFileExists(){
+        MainMethodResult result = invokeMain("-textFile","DavesBill");
+        assertEquals(new Integer(0), result.getExitCode());
+        assertTrue(result.getOut().equals(""));
+    }
+
+    @Test
+    public void TestFromGrader(){
+        System.out.println("NOW!");
+        MainMethodResult result = invokeMain("-print", "Test8", "123-456-7890", "234-567-8901", "03/03/2015", "12:00", "05/04/2015", "16:00");
+        System.out.println(result.getOut());
+    }
 
 }

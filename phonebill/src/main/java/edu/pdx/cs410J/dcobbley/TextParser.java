@@ -23,6 +23,7 @@ public class TextParser implements PhoneBillParser {
     @Override
     public AbstractPhoneBill parse() {
         BufferedReader reader = null;
+        AbstractPhoneBill bill = null;
         try{
             reader=new BufferedReader(new FileReader(file));
             String line;
@@ -30,7 +31,7 @@ public class TextParser implements PhoneBillParser {
             while ((line = reader.readLine()) != null) {
                 allLines+=line +"\n";
             }
-            ParseString(allLines);
+            bill = ParseString(allLines);
         }
         catch(IOException ex){
             System.out.println("Error Reading From File "+ ex);
@@ -42,7 +43,7 @@ public class TextParser implements PhoneBillParser {
             }
         }
 
-        return null;
+        return bill;
     }
 
     public void setFilePath(String path){
@@ -50,8 +51,8 @@ public class TextParser implements PhoneBillParser {
         file = new File(this.path+ "/" + path + ".txt");
     }
 
-    public void ParseString(String line){
-        AbstractPhoneBill myPhoneBill;
+    public AbstractPhoneBill ParseString(String line){
+        AbstractPhoneBill myPhoneBill=null;
         String callerNumber;
         String calleeNumber;
         String startTime;
@@ -65,17 +66,23 @@ public class TextParser implements PhoneBillParser {
             System.out.println(x+": "+tokens[x]);
         }*/
 
-        myPhoneBill = new phonebill(tokens[1].substring(10));
+        myPhoneBill = new phonebill(tokens[1].substring(10));//add a customer to the phonebill
+
         for(int counter = 2;counter < length;counter++ ){
             if(tokens[counter] != null){
                 String[] temp = tokens[counter].split("\\s+|,\\s*|\\.\\s*");
-                if(temp.length>10)
-                    System.out.println("foo");
-                    //myPhoneBill.addPhoneCall(new phonecall(temp[3],temp[5],temp[7]+temp[8], temp[10]+temp[11].substring(0,temp[11].length()-1)));
-
+                if(temp.length>10) {
+                    myPhoneBill.addPhoneCall(new phonecall(temp[3],temp[5],temp[7]+temp[8], temp[10]+temp[11].substring(0,temp[11].length()-1)));
+                }
             }
         }
+        return myPhoneBill;
     }
-
-
+    public boolean ifFileExists()
+    {
+        if(file.exists())
+            return true;
+        else
+            return false;
+    }
 }
