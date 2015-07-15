@@ -15,8 +15,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Project2 {
+    //Constants
+    private static final int MAXARGUMENTS = 3;//Update this value if we get more than -readme -print -textFile
     //Global variables
     static ArrayList<String> commands; //used to keep track of all the commands that will be run at the end of the program
+    static phonebill MyPhoneBill;
   /**
    * Main will be called when the program is run, it parses the commands given by the user and calls the appropriate functionality.
    * @param args contains all the command line arguments passed into the program
@@ -41,7 +44,34 @@ public class Project2 {
         //Check if one of the first 3 args is a command
         //If one or all three args are commands, put them into a command array which will get executed after work is done
         //Start parsing for a customer
-
+        for(;element<MAXARGUMENTS;element++){
+            //check if -print, -README, -textFile filename
+            switch(args[element]){
+                case "-README":
+                    //add readme to the command list
+                    addArgumentCommand("-README");
+                    break;
+                case "-print":
+                    //add print to the list
+                    addArgumentCommand("-print");
+                    break;
+                case "-textFile":
+                    //check for ++element
+                    if(args.length > element+1){
+                        //save -textfile Filename
+                        addArgumentCommand("textFile "+args[++element]);
+                    }
+                    else{
+                        //throw error
+                    }
+                    break;
+                default:
+                    parseCustomerIfExists(args, element);
+                    break;
+            }
+        }
+        //if first three args are all commands, then begin to parse the next bit if it exists.
+        parseCustomerIfExists(args, element);
 
         /*
         try {
@@ -114,7 +144,7 @@ public class Project2 {
                 System.exit(1);
               }
          */
-        parseCustomerIfExists(args, element);
+
     }
 
     /**
@@ -126,6 +156,25 @@ public class Project2 {
     private static void parseCustomerIfExists(String[] args, int element){
         //collect all customer data and phone call data.
         //Try to use only locals as much as possible
+
+        //check that element to element+6 exists
+        if(args.length>element+6){
+            //parse out customer information
+            MyPhoneBill = new phonebill(args[element++], new phonecall(args[element++], args[element++], args[element++]+ " " + args[element++], args[element++]+ " "+  args[element++]));
+                                        //customer                       caller            callee        starttime         +         data          endtime           +         data
+            //Parse commands at the end of the arg
+            parseCommandsAtEnd(args, element);
+        }
+        else{
+            if(args.length>element+5){
+                //didn't provide enough args
+                //throw error
+            }
+            else{
+                //go straight to executing the commands
+                executeCommands();
+            }
+        }
 /*
         try{
         customer = args[0];
@@ -158,7 +207,6 @@ public class Project2 {
 
 
         //Parse for commands at the end
-        parseCommandsAtEnd(args, element);
     }
 
     /**
@@ -170,6 +218,37 @@ public class Project2 {
     private static void parseCommandsAtEnd(String[] args, int element){
         //while elements<args.length keep parsing.
         //if case is a valid command, add it to the list
+        while(args.length>= element){
+            //there are args to parse
+            switch(args[element]){
+                case "-README":
+                    //add readme to the command list
+                    addArgumentCommand("-README");
+                    break;
+                case "-print":
+                    //add print to the list
+                    addArgumentCommand("-print");
+                    break;
+                case "-textFile":
+                    //check for ++element
+                    if(args.length > element+1){
+                        //save -textfile Filename
+                        addArgumentCommand("textFile "+args[++element]);
+                    }
+                    else{
+                        //throw error
+                    }
+                    break;
+                default:
+                    //throw error, cannot exist
+                    break;
+            }
+
+            element++;
+
+        }
+        //no args left to parse, begin execution
+        executeCommands();
     }
 
     /**
@@ -180,7 +259,10 @@ public class Project2 {
     private static void addArgumentCommand(String arg){
         //Modify the list array of commands.
         //This list of commands ie -README, -print, -textFile will get executed after any other work is done.
-
+        if(!commands.contains(arg)){
+            //Check if the list already contains it
+            commands.add(arg);
+        }
         /*
         try {
         for (int x = 7; x < args.length; x++) {
@@ -243,6 +325,13 @@ public class Project2 {
         //Check if arg exists in the list before adding
     }
 
+    private static void executeCommands(){
+        //Begin executing commands
+        //check if the commands exist and execute in this order.
+        //textFile
+        //print
+        //readme
+    }
     /**
      * Readme function contains the readme of all useful information the user may need to know.
      */
