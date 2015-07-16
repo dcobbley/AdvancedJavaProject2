@@ -6,6 +6,7 @@ import edu.pdx.cs410J.AbstractPhoneCall;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by david on 7/6/15.
@@ -14,7 +15,7 @@ import java.util.List;
 
 public class phonebill extends AbstractPhoneBill{
     String customer;
-    List<AbstractPhoneCall> phoneCalls;
+    ArrayList<AbstractPhoneCall> phoneCalls;
 
     /**
      * Constructor is essentially a setter function. creates a new list which will hold all additional phonecalls.
@@ -54,7 +55,13 @@ public class phonebill extends AbstractPhoneBill{
      */
     @Override
     public void addPhoneCall(AbstractPhoneCall abstractPhoneCall) {
-        phoneCalls.add(abstractPhoneCall);
+        boolean addPhoneCall = true;
+        for(AbstractPhoneCall call:phoneCalls){
+            if(call.toString().equals(abstractPhoneCall.toString()))
+                addPhoneCall = false;
+        }
+        if(addPhoneCall)
+            phoneCalls.add(abstractPhoneCall);
     }
 
     /**

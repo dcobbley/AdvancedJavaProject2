@@ -78,6 +78,10 @@ public class Project2 {
                         }
                         break;
                     default:
+                        if(args[element].startsWith("-"))
+                        {
+                            throw new IllegalArgumentException("Non-Valid Argument");
+                        }
                         flag = true;
                         break;
                 }
@@ -90,7 +94,6 @@ public class Project2 {
             Readme();
             System.exit(1);
         }
-
         //if first three args are all commands, then begin to parse the next bit if it exists.
         parseCustomerIfExists(args, element);
 
@@ -108,41 +111,31 @@ public class Project2 {
         //collect all customer data and phone call data.
         //Try to use only locals as much as possible
 
-        //check that element to element+6 exists
-        if(args.length>element+6){
-            //parse out customer information
-            MyPhoneBill = new phonebill(args[element++], new phonecall(args[element++], args[element++], args[element++]+ " " + args[element++], args[element++]+ " "+  args[element++]));
-                                        //customer                       caller            callee        starttime         +         data          endtime           +         data
-            //Parse commands at the end of the arg
-            parseCommandsAtEnd(args, element);
-        }
-        else{
-            if(args.length>element+5){
-                //didn't provide enough args
-                //throw error
-            }
-            else{
-                //go straight to executing the commands
+        try {
+            //check that element to element+6 exists
+            if (args.length > element + 6) {
+                //parse out customer information
+                MyPhoneBill = new phonebill(args[element++], new phonecall(args[element++], args[element++], args[element++] + " " + args[element++], args[element++] + " " + args[element++]));
+                //customer                       caller            callee        starttime         +         data          endtime           +         data
+                //Parse commands at the end of the arg
+                parseCommandsAtEnd(args, element);
+            } else {
+                if (args.length > element) {
+                    //didn't provide enough args
+                    //throw error
+                    throw new IllegalArgumentException("Not enough arguments provided");
+                } else {
+                    //go straight to executing the commands
 
-                executeCommands();
+                    executeCommands();
+                }
             }
         }
-/*
-
-        if(startTime.contains("\"")||endTime.contains("\""))
-            throw new IllegalArgumentException("Date and time cannot contain quotes ");
-        if(!callerNumber.matches("\\d{3}-\\d{3}-\\d{4}$")||!calleeNumber.matches("\\d{3}-\\d{3}-\\d{4}$"))
-            throw new IllegalArgumentException("Phone numbers must contain exactly 10 digits plus two dashes");
-        if(!args[3].matches("(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((19|20)\\d\\d)")||!args[5].matches("(0?[1-9]|1[012])/(0?[1-9]|[12][0-9]|3[01])/((19|20)\\d\\d)"))
-            throw new IllegalArgumentException("Date format must follow mm/dd/yyyy");
-        if(!args[4].matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")||!args[6].matches("([01]?[0-9]|2[0-3]):[0-5][0-9]"))
-            throw new IllegalArgumentException("Time format must follow mm:hh (24 hour time)");
-        }
-        catch (IllegalArgumentException ex){;
+        catch(IllegalArgumentException ex){
             System.out.println(ex.getMessage());
             System.exit(1);
         }
- */
+
         //Create a new instance of Phonebill with a new phonecall. When we have persistent data, this line will change.
         //myPhoneBill = new phonebill(customer, new phonecall(callerNumber, calleeNumber, startTime, endTime));
 
@@ -195,7 +188,8 @@ public class Project2 {
             executeCommands();
         }
         catch(Exception ex){
-
+            System.out.println(ex.getMessage());
+            System.exit(1);
         }
     }
 
@@ -307,7 +301,7 @@ public class Project2 {
                     MyPhoneBill = new phonebill(textFilePhoneBill.getCustomer());
                     Collection<phonecall> tempPhoneCall = textFilePhoneBill.getPhoneCalls();
                     for(phonecall ph:tempPhoneCall){
-                        MyPhoneBill.addPhoneCall(ph);
+                            MyPhoneBill.addPhoneCall(ph);
                     }
                 }
                 //Write data back to the file

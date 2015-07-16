@@ -5,6 +5,7 @@ import edu.pdx.cs410J.PhoneBillDumper;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 /**
@@ -42,7 +43,12 @@ public class TextDumper implements PhoneBillDumper {
             writer.write("Created on: "+dateFormat.format(date) + "\n");
 
             writer.write("Customer: "+ bill.getCustomer()+"\n");
-            writer.write(bill.getPhoneCalls().toString());
+            //writer.write(bill.getPhoneCalls().toString());
+            //Collection my = bill.getPhoneCalls();
+            for(Object obj : bill.getPhoneCalls()){
+                writer.write(obj.toString()+"\n");
+            }
+
             // All done
             writer.flush();
             writer.close();
