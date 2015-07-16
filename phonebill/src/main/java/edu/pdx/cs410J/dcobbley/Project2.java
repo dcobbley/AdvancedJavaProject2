@@ -153,7 +153,7 @@ public class Project2 {
         //while elements<args.length keep parsing.
         //if case is a valid command, add it to the list
         try {
-            int maxElement = element + 3;
+            int maxElement = element + 4;
             while (args.length > element && args.length < maxElement) {
                 //there are args to parse
                 switch (args[element]) {
@@ -223,7 +223,6 @@ public class Project2 {
 
         //readme
         //Simply call the readme
-
         try {
             for (String comm : commands) {
                 switch(comm){
