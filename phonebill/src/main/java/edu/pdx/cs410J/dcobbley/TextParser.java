@@ -3,6 +3,7 @@ package edu.pdx.cs410J.dcobbley;
 import edu.pdx.cs410J.AbstractPhoneBill;
 import edu.pdx.cs410J.ParserException;
 import edu.pdx.cs410J.PhoneBillParser;
+import org.omg.CORBA.SystemException;
 import sun.plugin.dom.core.Text;
 
 import java.io.*;
@@ -20,6 +21,15 @@ public class TextParser implements PhoneBillParser {
      *
      * @throws ParserException If the source cannot be parsed
      */
+
+    TextParser(String path){
+        this.path = System.getProperty("user.dir");
+        file = new File(this.path+ "/" + path + ".txt");
+    }
+
+    TextParser() throws SystemException{
+    }
+
     @Override
     public AbstractPhoneBill parse() {
         BufferedReader reader = null;
@@ -46,10 +56,6 @@ public class TextParser implements PhoneBillParser {
         return bill;
     }
 
-    public void setFilePath(String path){
-        this.path = System.getProperty("user.dir");
-        file = new File(this.path+ "/" + path + ".txt");
-    }
 
     public AbstractPhoneBill ParseString(String line){
         AbstractPhoneBill myPhoneBill=null;
@@ -57,7 +63,8 @@ public class TextParser implements PhoneBillParser {
         String calleeNumber;
         String startTime;
         String endTime;
-
+if(line == "")
+    System.out.println("yuppers");
         //String[] tokens = line.split("\\s+|,\\s*|\\.\\s*");
         String[] tokens = line.split("\\r?\\n");
         int length = tokens.length;

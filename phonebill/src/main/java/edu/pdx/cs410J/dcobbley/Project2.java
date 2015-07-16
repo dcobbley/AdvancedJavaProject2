@@ -11,6 +11,7 @@ package edu.pdx.cs410J.dcobbley;
 import edu.pdx.cs410J.AbstractPhoneBill;
 import edu.pdx.cs410J.AbstractPhoneCall;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -19,7 +20,7 @@ public class Project2 {
     private static final int MAXARGUMENTS = 3;//Update this value if we get more than -readme -print -textFile
     //Global variables
     static ArrayList<String> commands; //used to keep track of all the commands that will be run at the end of the program
-    static phonebill MyPhoneBill = null;
+    static phonebill MyPhoneBill;
   /**
    * Main will be called when the program is run, it parses the commands given by the user and calls the appropriate functionality.
    * @param args contains all the command line arguments passed into the program
@@ -27,7 +28,9 @@ public class Project2 {
    */
   public static void main(String[] args) {
     Class c = AbstractPhoneBill.class;  // Refer to one of Dave's classes so that we can be sure it is on the classpath
-    commands = new ArrayList<String>();
+      commands = null;
+      MyPhoneBill = null;
+      commands = new ArrayList<String>();
       parseCommandsAtBeginning(args);
 
     System.exit(0);
@@ -50,8 +53,10 @@ public class Project2 {
             //Check if one of the first 3 args is a command
             //If one or all three args are commands, put them into a command array which will get executed after work is done
             //Start parsing for a customer
+            boolean flag = false;
             for (; element < MAXARGUMENTS && element < args.length; element++) {
                 //check if -print, -README, -textFile filename
+
                 switch (args[element]) {
                     case "-README":
                         //add readme to the command list
@@ -65,15 +70,19 @@ public class Project2 {
                         //check for ++element
                         if (args.length > element + 1) {
                             //save -textfile Filename
-                            addArgumentCommand("textFile " + args[++element]);
+                            addArgumentCommand("textFile");
+                            addArgumentCommand(args[++element]);
                         } else {
                             //throw error
+                            throw new IllegalArgumentException("-textFile argument must be followed by <filename>");
                         }
                         break;
                     default:
-                        parseCustomerIfExists(args, element);
+                        flag = true;
                         break;
                 }
+                if(flag)
+                    break;
             }
         }
         catch(IllegalArgumentException ex){
@@ -81,80 +90,10 @@ public class Project2 {
             Readme();
             System.exit(1);
         }
+
         //if first three args are all commands, then begin to parse the next bit if it exists.
         parseCustomerIfExists(args, element);
 
-        /*
-        try {
-          if (args.length == 0) //Check if there are no arguments
-              throw new IllegalArgumentException("Missing command line arguments");
-          if(args.length == 1){
-              switch(args[0]) {
-                  case "-README":
-                      Readme();
-                      System.exit(0);
-                      break;
-                  default:
-                      throw new IllegalArgumentException("Incorrect args");
-              }
-          }
-          if(args.length == 2){
-              switch(args[0]){
-                  case "-textFile":
-                      parse = new TextParser();
-                      parse.setFilePath(args[1]);
-                      if(parse.ifFileExists()){
-                          currentPhoneBill = parse.parse();
-                          System.exit(0);
-                      }
-                      else
-                      {
-                          //Create an empty phopne bill and write to disk
-                          currentPhoneBill = new phonebill();
-                          dump = new TextDumper();
-                          dump.setFilePath(args[1]);
-                          dump.dump(currentPhoneBill);
-                      }
-
-                      break;
-                  default:
-                      throw new IllegalArgumentException("Incorrect args for -textFile ");
-                      }
-                  }
-                  if(args.length == 3){
-                      switch(args[0]){
-                          case "-textFile":
-                              parse = new TextParser();
-                              parse.setFilePath(args[1]);
-                              currentPhoneBill = parse.parse();
-                              break;
-                          case "-README":
-                              Readme();
-                              System.exit(0);
-                              break;
-                          default:
-                              throw new IllegalArgumentException("Incorrect args for -textFile ");
-                      }
-                  }
-                  else if (args.length < 6) //Check if there are not enough arguments to be a complete phonecall
-                      throw new IllegalArgumentException("Not enough args");      }
-              catch(IllegalArgumentException ex)
-              {
-                System.out.println(ex.getMessage());
-                System.out.println("Usage: java edu.pdx.cs410J.<login-id>.Project2 [options] <args>\n" +
-                        "   args are (in this order):\n" +
-                        "       customer               Person whose phone bill we’re modeling\n" +
-                        "       callerNumber           Phone number of caller\n" +
-                        "       calleeNumber           Phone number of person who was called\n" +
-                        "       startTime              Date and time call began (24-hour time)\n" +
-                        "       endTime                Date and time call ended (24-hour time)\n" +
-                        "   options are (options may appear in any order):\n" +
-                        "       -print                 Prints a description of the new phone call\n" +
-                        "       -README                Prints a README for this project and exits\n" +
-                        "   Date and time should be in the format: mm/dd/yyyy hh:mm");
-                System.exit(1);
-              }
-         */
 
     }
 
@@ -165,6 +104,7 @@ public class Project2 {
      * @throws
      */
     private static void parseCustomerIfExists(String[] args, int element){
+
         //collect all customer data and phone call data.
         //Try to use only locals as much as possible
 
@@ -184,22 +124,10 @@ public class Project2 {
             else{
                 //go straight to executing the commands
 
-                System.out.println("Execute B called");
                 executeCommands();
             }
         }
 /*
-        try{
-        customer = args[0];
-        callerNumber = args[1];
-        calleeNumber = args[2];
-
-        startTime = args[3] + " ";
-        startTime += args[4];
-
-        endTime = args[5] + " ";
-        endTime += args[6];
-
 
         if(startTime.contains("\"")||endTime.contains("\""))
             throw new IllegalArgumentException("Date and time cannot contain quotes ");
@@ -231,40 +159,44 @@ public class Project2 {
     private static void parseCommandsAtEnd(String[] args, int element){
         //while elements<args.length keep parsing.
         //if case is a valid command, add it to the list
-        int maxElement = element +3;
-        while(args.length> element && args.length<maxElement){
-            //there are args to parse
-            switch(args[element]){
-                case "-README":
-                    //add readme to the command list
-                    addArgumentCommand("-README");
-                    break;
-                case "-print":
-                    //add print to the list
-                    addArgumentCommand("-print");
-                    break;
-                case "-textFile":
-                    //check for ++element
-                    if(args.length > element+1){
-                        //save -textfile Filename
-                        addArgumentCommand("textFile "+args[++element]);
-                    }
-                    else{
-                        //throw error
-                    }
-                    break;
-                default:
-                    //throw error, cannot exist
-                    break;
-            }
+        try {
+            int maxElement = element + 3;
+            while (args.length > element && args.length < maxElement) {
+                //there are args to parse
+                switch (args[element]) {
+                    case "-README":
+                        //add readme to the command list
+                        addArgumentCommand("-README");
+                        break;
+                    case "-print":
+                        //add print to the list
+                        addArgumentCommand("-print");
+                        break;
+                    case "-textFile":
+                        //check for ++element
+                        if (args.length > element + 1) {
+                            //save -textfile Filename
+                            addArgumentCommand("textFile");
+                            addArgumentCommand(args[++element]);
+                        } else {
+                            //throw error
+                            throw new Exception("-textFile argument must be followed by <filename>");
+                        }
+                        break;
+                    default:
+                        //throw error, cannot exist
+                        throw new Exception("Not a valid command");
+                }
 
-            element++;
+                element++;
+
+            }
+            //no args left to parse, begin execution
+            executeCommands();
+        }
+        catch(Exception ex){
 
         }
-        //no args left to parse, begin execution
-
-        System.out.println("execute A called");
-        executeCommands();
     }
 
     /**
@@ -279,118 +211,57 @@ public class Project2 {
             //Check if the list already contains it
             commands.add(arg);
         }
-        /*
-        try {
-        for (int x = 7; x < args.length; x++) {
-            if (x > 10)
-                break;
-            switch (args[x]) {
-                case "-README":
-                    Readme();
-                    break;
-                case "-print":
-                    System.out.println("Customer: " + myPhoneBill.getCustomer() + " " + myPhoneBill.getPhoneCalls());
-                    break;
-                case "-textFile":
-                    //must contain x+1, pass the
-                    if(args[++x] != null) {
-                        parse = new TextParser();
-                        parse.setFilePath(args[x]);
-                        //File exists
-                        if(parse.ifFileExists()){
-                            //Parse the file & read in phonebill
-                            otherPhoneBill = parse.parse();
-                            //check that the customer names match
-                            if(myPhoneBill.getCustomer().equals(otherPhoneBill.getCustomer())){
-                                //try to add the phonecall to the list of phone calls - watch for duplicates
-                                Collection tempPhoneCalls = otherPhoneBill.getPhoneCalls();
-                                tempPhoneCalls.forEach(obj->myPhoneBill.addPhoneCall((AbstractPhoneCall) obj));
-                                //dump the bill back to the text file
-                                dump = new TextDumper();
-                                dump.setFilePath(args[x]);
-                                dump.dump(myPhoneBill);
-
-                            }
-                        }
-                        else{
-                            //File does not exist
-                            //create a new dump
-                            dump = new TextDumper();
-                            dump.setFilePath(args[x]);
-                            //dump
-                            dump.dump(myPhoneBill);
-                        }
-                        }
-                        else{
-                            throw new IllegalArgumentException("-textFile argument must contain a valid file name");
-                        }
-
-                        break;
-                        default:
-                            throw new IllegalArgumentException("Command Line Argument not found: \"" + args[x] +"\"");
-                        }
-                    }
-                }
-                catch(IllegalArgumentException ex){
-                    System.out.println(ex.getMessage());
-                    System.exit(1);
-                }
-         */
-
 
         //Check if arg exists in the list before adding
     }
 
     private static void executeCommands(){
-
-        System.out.println("Execute commands called");
         boolean printFlag = false;
+        boolean textFileFlag = false;
+        boolean ReadmeFlag = false;
+        String fileName=null;
         //Begin executing commands
         //check if the commands exist and execute in this order.
         //textFile-
-        // check if it exists, if so, {
-        // read in and compare with myPhoneBill.
-        //if customer name not equal throw error
-        //if myPhoneBill == null, set TemporaryPhoneBill to myPhoneBill
-        //
-        //else{
-        //create a new empty phone bill
-        //add myPhoneBill to it, if myPhoneBill is null, create emptyphonebill
 
         //print
         //simply print myPhoneBill, should contain an up to date version of whatever it needs
 
         //readme
         //Simply call the readme
+
         try {
             for (String comm : commands) {
-                if (comm.contains("-textFile")) {
-
-
-                    //commands.remove(commands.indexOf(comm));
-
-                    //commands.remove(commands.indexOf(comm)+1);
-                }
-            }
-            int x= 0;
-            for (String comm : commands) {
-                if (!printFlag &&comm.contains("-print")) {
-                    System.out.println("if Statement called");
-                    if (MyPhoneBill != null) {
-                        System.out.println("Customer: " + MyPhoneBill.getCustomer() + " " + MyPhoneBill.getPhoneCalls());
+                switch(comm){
+                    case "textFile":
+                        textFileFlag=true;
+                    break;
+                    case "-README":
+                        ReadmeFlag = true;
+                    break;
+                    case "-print":
                         printFlag = true;
-                    } else {
-                        //MyphoneBill is null, throw exception
-                        throw new Exception("Must provide a phone bill");
-                    }
+                    break;
+                    default:
+                        fileName = comm;
+                        break;
+
                 }
             }
-            for (String comm : commands) {
-                if (comm.contains("-README")) {
-                    Readme();
-
-                    //commands.remove(commands.indexOf(comm));
+            if(textFileFlag){
+                textFileFunction(fileName);
+            }
+            if(printFlag){
+                if (MyPhoneBill != null) {
+                    System.out.println("Customer: " + MyPhoneBill.getCustomer() + " " + MyPhoneBill.getPhoneCalls());
+                    printFlag = true;
+                } else {
+                    //MyphoneBill is null, throw exception
+                    throw new Exception("Must provide a phone bill");
                 }
+            }
+            if(ReadmeFlag){
+                Readme();
             }
         }
         catch(Exception ex)
@@ -400,6 +271,63 @@ public class Project2 {
             System.exit(1);
         }
     }
+
+    private static void textFileFunction(String path){
+        try {
+            if (path == null)
+                throw new Exception("Path name missing");
+
+            TextParser par = new TextParser(path);
+            if(par.ifFileExists()){
+                System.out.println("start here");
+                //file exists
+                // read in and compare with myPhoneBill.
+                //if customer name not equal throw error
+                //if myPhoneBill == null, set TemporaryPhoneBill to myPhoneBill
+                AbstractPhoneBill textFilePhoneBill = par.parse();
+
+                System.out.println("hehe");
+                if(MyPhoneBill != null && MyPhoneBill.getCustomer().equals(textFilePhoneBill.getCustomer())){
+                    System.out.println("here1");
+                    //Transfer in data from text file phone bill to MyPhoneBill
+                    Collection<phonecall> tempPhoneCall = textFilePhoneBill.getPhoneCalls();
+                    for(phonecall ph:tempPhoneCall){
+                        MyPhoneBill.addPhoneCall(ph);
+                    }
+                }
+                else if(MyPhoneBill != null){
+                    System.out.println("here2");
+                    //throw new exception, names don't match
+                    throw new Exception("Phonebill names don't match");
+                }
+                else{
+                    System.out.println("here3");
+                    //create a new phonebill and add in data?
+                    MyPhoneBill = new phonebill(textFilePhoneBill.getCustomer());
+                    Collection<phonecall> tempPhoneCall = textFilePhoneBill.getPhoneCalls();
+                    for(phonecall ph:tempPhoneCall){
+                        MyPhoneBill.addPhoneCall(ph);
+                    }
+                }
+                //Write data back to the file
+                TextDumper dump = new TextDumper(path);
+                dump.dump(MyPhoneBill);
+            }
+            else{
+                //File does not exist
+                //create a new empty phone bill
+                //add myPhoneBill to it, if myPhoneBill is null, create emptyphonebill
+                TextDumper dump = new TextDumper(path);
+                dump.dump(MyPhoneBill);
+
+            }
+
+        }
+        catch(Exception ex){
+            System.out.println("error: " + ex.getMessage());
+        }
+
+    }
     /**
      * Readme function contains the readme of all useful information the user may need to know.
      */
@@ -408,17 +336,18 @@ public class Project2 {
         System.out.println("This program is a phonebill application which takes a very specific amount of arguments");
         System.out.println("You must provide a customer name, caller number, callee number, start time, and end time (mm/dd/yyyy mm:hh)");
         System.out.println();
-        System.out.println("Usage: java edu.pdx.cs410J.<login-id>.Project2 [options] <args>\n" +
-                "   args are (in this order):\n" +
-                "       customer               Person whose phone bill we’re modeling\n" +
-                "       callerNumber           Phone number of caller\n" +
-                "       calleeNumber           Phone number of person who was called\n" +
-                "       startTime              Date and time call began (24-hour time)\n" +
-                "       endTime                Date and time call ended (24-hour time)\n" +
-                "   options are (options may appear in any order):\n" +
-                "       -print                 Prints a description of the new phone call\n" +
-                "       -README                Prints a README for this project and exits\n" +
-                "   Date and time should be in the format: mm/dd/yyyy hh:mm");
+        System.out.println("usage: java edu.pdx.cs410J.<login-id>.Project2 [options] <args>\n" +
+                "args are (in this order):\n" +
+                "customer               Person whose phone bill we’re modeling\n" +
+                "callerNumber           Phone number of caller\n" +
+                "calleeNumber           Phone number of person who was called\n" +
+                "startTime              Date and time call began (24-hour time)\n" +
+                "endTime                Date and time call ended (24-hour time)\n" +
+                "options are (options may appear in any order):\n" +
+                "-textFile file         Where to read/write the phone bill\n" +
+                "-print                 Prints a description of the new phone call\n" +
+                "-README                Prints a README for this project and exits\n" +
+                "Dates and times should be in the format: mm/dd/yyyy hh:mm");
     }
 
 }

@@ -15,6 +15,13 @@ public class TextDumper implements PhoneBillDumper {
 
     File file;
     String path=null;
+
+    TextDumper(String path){
+        this.path = System.getProperty("user.dir");
+        file = new File(this.path+ "/" + path + ".txt");
+
+    }
+
     /**
      * Dumps a phone bill to some destination.
      *
@@ -40,9 +47,5 @@ public class TextDumper implements PhoneBillDumper {
             e.printStackTrace();
         }
     }
-    public void setFilePath(String path){
-        this.path = System.getProperty("user.dir");
-        file = new File(this.path+ "/" + path + ".txt");
 
-    }
 }
