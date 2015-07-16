@@ -25,6 +25,12 @@ public class phonecall extends AbstractPhoneCall {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+    phonecall(){
+        calleeNumber ="";
+        callerNumber ="";
+        startTime ="";
+        endTime = "";
+    }
 
     /**
      *

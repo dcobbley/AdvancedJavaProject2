@@ -30,6 +30,9 @@ public class TextDumper implements PhoneBillDumper {
     @Override
     public void dump(AbstractPhoneBill bill) {
 
+        if(bill == null){
+            bill = new phonebill("", new phonecall());
+        }
         try {
             DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             Date date = new Date();

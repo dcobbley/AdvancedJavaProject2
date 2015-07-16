@@ -266,8 +266,11 @@ public class Project2 {
         }
         catch(Exception ex)
         {
-            System.out.println(ex.getMessage());
-            Readme();
+            if(ex.getMessage()!=null) {
+                System.out.println(ex.getMessage());
+                Readme();
+            }
+
             System.exit(1);
         }
     }
@@ -275,20 +278,20 @@ public class Project2 {
     private static void textFileFunction(String path){
         try {
             if (path == null)
-                throw new Exception("Path name missing");
+                throw new IOException("Path name missing");
 
             TextParser par = new TextParser(path);
             if(par.ifFileExists()){
-                System.out.println("start here");
                 //file exists
                 // read in and compare with myPhoneBill.
                 //if customer name not equal throw error
                 //if myPhoneBill == null, set TemporaryPhoneBill to myPhoneBill
                 AbstractPhoneBill textFilePhoneBill = par.parse();
+                if(textFilePhoneBill == null) {
+                    throw new IOException("File IO Error");
+                }
 
-                System.out.println("hehe");
                 if(MyPhoneBill != null && MyPhoneBill.getCustomer().equals(textFilePhoneBill.getCustomer())){
-                    System.out.println("here1");
                     //Transfer in data from text file phone bill to MyPhoneBill
                     Collection<phonecall> tempPhoneCall = textFilePhoneBill.getPhoneCalls();
                     for(phonecall ph:tempPhoneCall){
@@ -296,12 +299,10 @@ public class Project2 {
                     }
                 }
                 else if(MyPhoneBill != null){
-                    System.out.println("here2");
                     //throw new exception, names don't match
-                    throw new Exception("Phonebill names don't match");
+                    throw new IOException("Phonebill names don't match");
                 }
                 else{
-                    System.out.println("here3");
                     //create a new phonebill and add in data?
                     MyPhoneBill = new phonebill(textFilePhoneBill.getCustomer());
                     Collection<phonecall> tempPhoneCall = textFilePhoneBill.getPhoneCalls();
@@ -323,8 +324,9 @@ public class Project2 {
             }
 
         }
-        catch(Exception ex){
-            System.out.println("error: " + ex.getMessage());
+        catch(IOException ex){
+
+            System.exit(1);
         }
 
     }

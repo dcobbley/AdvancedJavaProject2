@@ -6,6 +6,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/edu/pdx/cs410J/dcobbley/Project2Test.java" afterPath="$PROJECT_DIR$/src/test/java/edu/pdx/cs410J/dcobbley/Project2Test.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextDumper.java" afterPath="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextDumper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextParser.java" afterPath="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/phonecall.java" afterPath="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/phonecall.java" />
     </list>
     <ignored path="phonebill.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +33,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/Project2.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="288" column="40" selection-start-line="288" selection-start-column="40" selection-end-line="288" selection-end-column="40" />
+              <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -51,14 +52,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Project2Test.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Project2Test.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/edu/pdx/cs410J/dcobbley/Project2Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="42" column="55" selection-start-line="42" selection-start-column="55" selection-end-line="42" selection-end-column="55" />
+            <state vertical-scroll-proportion="-4.8736844">
+              <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
               <folding>
-                <element signature="e#470#471#0" expanded="true" />
-                <element signature="e#527#528#0" expanded="true" />
+                <element signature="e#521#522#0" expanded="true" />
+                <element signature="e#578#579#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/phonecall.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+              <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -78,7 +79,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextDumper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,11 +87,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TextParser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TextParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17894737">
-              <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="66" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,10 +123,11 @@
         <option value="$PROJECT_DIR$/src/test/java/edu/pdx/cs410J/dcobbley/Project1Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/Project1.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/phonebill.java" />
-        <option value="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextDumper.java" />
-        <option value="$PROJECT_DIR$/src/test/java/edu/pdx/cs410J/dcobbley/Project2Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/Project2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/phonecall.java" />
+        <option value="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextDumper.java" />
         <option value="$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextParser.java" />
+        <option value="$PROJECT_DIR$/src/test/java/edu/pdx/cs410J/dcobbley/Project2Test.java" />
       </list>
     </option>
   </component>
@@ -679,11 +681,12 @@
       <workItem from="1436989529975" duration="3894000" />
       <workItem from="1436998460604" duration="110000" />
       <workItem from="1437000099905" duration="6832000" />
+      <workItem from="1437008141814" duration="5120000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42962000" />
+    <option name="totallyTimeSpent" value="48082000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="24" width="1535" height="876" extended-state="6" />
@@ -730,7 +733,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32934928" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24983211" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24983211" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32934928" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -787,7 +790,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -795,7 +797,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -823,8 +824,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
           <folding>
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -861,7 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -869,7 +869,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -897,8 +896,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -935,7 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -943,7 +941,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -971,8 +968,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
           <folding>
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1009,7 +1006,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,7 +1013,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1045,8 +1040,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
           <folding>
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1083,7 +1078,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1091,7 +1085,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1128,7 +1121,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1136,7 +1128,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1158,7 +1149,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1166,15 +1156,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/phonecall.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1186,23 +1167,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextDumper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/phonecall.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <caret line="31" column="21" selection-start-line="31" selection-start-column="21" selection-end-line="31" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="0" selection-start-line="76" selection-start-column="0" selection-end-line="76" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/edu/pdx/cs410J/dcobbley/Project2Test.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextDumper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="55" selection-start-line="42" selection-start-column="55" selection-end-line="42" selection-end-column="55" />
+          <caret line="33" column="54" selection-start-line="33" selection-start-column="54" selection-end-line="33" selection-end-column="54" />
           <folding>
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1210,7 +1198,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/Project2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="288" column="40" selection-start-line="288" selection-start-column="40" selection-end-line="288" selection-end-column="40" />
+          <caret line="327" column="0" selection-start-line="327" selection-start-column="0" selection-end-line="327" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
@@ -1218,12 +1206,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/edu/pdx/cs410J/dcobbley/TextParser.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/edu/pdx/cs410J/dcobbley/Project2Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17894737">
-          <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="66" selection-end-column="34" />
+        <state vertical-scroll-proportion="-4.8736844">
+          <caret line="35" column="2" selection-start-line="35" selection-start-column="2" selection-end-line="35" selection-end-column="2" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#521#522#0" expanded="true" />
+            <element signature="e#578#579#0" expanded="true" />
           </folding>
         </state>
       </provider>

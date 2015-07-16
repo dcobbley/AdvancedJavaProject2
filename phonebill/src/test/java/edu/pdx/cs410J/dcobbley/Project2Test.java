@@ -3,6 +3,10 @@ package edu.pdx.cs410J.dcobbley;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 import edu.pdx.cs410J.InvokeMainTestCase;
+
+import java.io.File;
+import java.io.PrintWriter;
+
 import static junit.framework.Assert.assertEquals;
 
 /**
@@ -21,7 +25,7 @@ public class Project2Test extends InvokeMainTestCase {
    * Tests that invoking the main method with no arguments issues an error
    */
 
-    /*
+/*
     //Conditional upon their being a DavesBill file in the correct directory
     @Test
     public void TestTextFileNoDataNoArgsWithFileExists(){
@@ -29,21 +33,37 @@ public class Project2Test extends InvokeMainTestCase {
         assertEquals(new Integer(0), result.getExitCode());
         assertTrue(result.getOut().equals(""));
     }
-
+*/
     @Test
     public void TestFromGrader(){
-        System.out.println("NOW!");
         MainMethodResult result = invokeMain("-print", "Test8", "123-456-7890", "234-567-8901", "03/03/2015", "12:00", "05/04/2015", "16:00");
-        System.out.println(result.getOut());
-    }*/
+        assertEquals(new Integer(0), result.getExitCode());
+        assertTrue(result.getOut().contains("Customer: Test8 [Phone call from 123-456-7890 to 234-567-8901 from 03/03/2015 12:00 to 05/04/2015 16:00]"));
+    }
+
+
 
 
   @Test
-  public void TestTextParser(){
+  public void TestEmptyTextFile(){
+      try {
+          String path = System.getProperty("user.dir") + "/DavesBill.txt";
+          File file = new File(path);
+          PrintWriter writer = new PrintWriter(file);
+          writer.write("");
+          writer.flush();
+          writer.close();
+      }
+      catch(Exception ex){
+
+      }
       MainMethodResult result = invokeMain("-textFile", "DavesBill");
-      System.out.println(result.getOut());
+      assertEquals(new Integer(1), result.getExitCode());
+      assertTrue(result.getOut().contains("Error Reading From File Empty File"));
   }
-/*
+
+
+
     @Test
   public void TestTextDumper(){
       MainMethodResult result = invokeMain("david", "503-709-4866", "503-880-6960", "10/15/2015", "09:38", "10/15/2015", "09:42", "-textFile", "DavesBill");
@@ -176,6 +196,21 @@ public class Project2Test extends InvokeMainTestCase {
         //System.out.println(result.getOut());
     }
 
-*/
+    @Test
+    public void TestNonExistantFile(){
+        try{
+            String path = System.getProperty("user.dir") + "/DavesBill.txt";
+            File file = new File(path);
+            file.delete();
+        }
+        catch(Exception ex){
+            System.out.println("Sad Day");
+        }
+        MainMethodResult result = invokeMain("-textFile", "DavesBill");
+        assertEquals(new Integer(0), result.getExitCode());
+
+    }
+
+
 
 }

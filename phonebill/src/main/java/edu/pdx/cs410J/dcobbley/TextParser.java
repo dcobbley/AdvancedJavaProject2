@@ -41,10 +41,12 @@ public class TextParser implements PhoneBillParser {
             while ((line = reader.readLine()) != null) {
                 allLines+=line +"\n";
             }
+            if(allLines == "")
+                throw new IOException("Empty File");
             bill = ParseString(allLines);
         }
         catch(IOException ex){
-            System.out.println("Error Reading From File "+ ex);
+            System.out.println("Error Reading From File " + ex.getMessage());
         }finally {
             try {
                 reader.close();
@@ -63,8 +65,6 @@ public class TextParser implements PhoneBillParser {
         String calleeNumber;
         String startTime;
         String endTime;
-if(line == "")
-    System.out.println("yuppers");
         //String[] tokens = line.split("\\s+|,\\s*|\\.\\s*");
         String[] tokens = line.split("\\r?\\n");
         int length = tokens.length;
